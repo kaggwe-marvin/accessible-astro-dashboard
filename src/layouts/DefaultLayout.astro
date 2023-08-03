@@ -1,33 +1,39 @@
 ---
-import '../assets/scss/globals.scss'
-import Navigation from '../components/Navigation.astro'
-import { DarkMode, SkipLinks } from 'accessible-astro-components'
-import { Icon } from 'astro-icon'
+import "../assets/scss/globals.scss";
+import Navigation from "../components/Navigation.astro";
+import { DarkMode, SkipLinks } from "accessible-astro-components";
+import { Icon } from "astro-icon";
 
-const {title} = Astro.props
-let subtitle = 'Accessible Astro Dashboard'
+const { title } = Astro.props;
+let subtitle = "Namungona staff Dashboard";
 ---
 
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- open graph -->
-    <meta property="og:title" content="Accessible Astro Dashboard">
-    <meta property="og:description" content="An Accessible Dashboard Theme for Astro including a login page, a dashboard page and several other pages and components.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dashboard.accessible-astro.dev">
-    <meta property="og:image" content="/social-preview-image.png">
+    <meta property="og:title" content="Accessible Astro Dashboard" />
+    <meta
+      property="og:description"
+      content="An Accessible Dashboard Theme for Astro including a login page, a dashboard page and several other pages and components."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dashboard.accessible-astro.dev" />
+    <meta property="og:image" content="/social-preview-image.png" />
 
     <!-- page title -->
     <title>{title} - {subtitle}</title>
@@ -43,35 +49,35 @@ let subtitle = 'Accessible Astro Dashboard'
       <Navigation>
         <li class="menu-item">
           <a href="/">
-            <Icon pack="majesticons" name="home-line" /> 
+            <Icon pack="majesticons" name="home-line" />
             <span class="sr-only">Dashboard</span>
           </a>
         </li>
         <li class="menu-item">
           <a href="/products/">
-            <Icon pack="majesticons" name="shopping-cart-line" /> 
-            <span class="sr-only">Products</span>
+            <Icon pack="majesticons" name="shopping-cart-line" />
+            <span class="sr-only">New Cirriculum</span>
           </a>
         </li>
         <li class="menu-item">
           <a href="/users/">
-            <Icon pack="majesticons" name="users-line" /> 
-            <span class="sr-only">Users</span>
+            <Icon pack="majesticons" name="users-line" />
+            <span class="sr-only">Attendence</span>
           </a>
         </li>
         <li class="menu-item">
           <a href="/messages/">
-            <Icon pack="majesticons" name="messages-line" /> 
-            <span class="sr-only">Messages</span>
+            <Icon pack="majesticons" name="messages-line" />
+            <span class="sr-only">Notice Board</span>
           </a>
         </li>
         <li class="menu-item">
           <a href="/media/">
-            <Icon pack="majesticons" name="image-line" /> 
-            <span class="sr-only">Media</span>
+            <Icon pack="majesticons" name="image-line" />
+            <span class="sr-only">Reports</span>
           </a>
         </li>
-      </Navigation>    
+      </Navigation>
       <main id="main-content">
         <slot />
       </main>
@@ -80,15 +86,15 @@ let subtitle = 'Accessible Astro Dashboard'
 </html>
 
 <script>
-  let isLoggedIn = await localStorage.getItem('isLoggedIn')
+  let isLoggedIn = await localStorage.getItem("isLoggedIn");
 
   if (isLoggedIn === null) {
-    window.location.href = '/login'
+    window.location.href = "/login";
   }
 </script>
 
 <style lang="scss">
-  @use '../assets/scss/base/breakpoint' as *;
+  @use "../assets/scss/base/breakpoint" as *;
 
   .ui-controls {
     position: absolute;
@@ -130,12 +136,12 @@ let subtitle = 'Accessible Astro Dashboard'
 
       @include breakpoint(medium) {
         width: 30px;
-        
+
         path {
           fill: var(--secondary-500);
         }
       }
-    
+
       path {
         transition: fill 0.2s ease-in-out;
       }

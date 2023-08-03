@@ -1,6 +1,6 @@
 ---
-import ResponsiveToggle from './ResponsiveToggle.astro'
-import { Icon } from 'astro-icon'
+import ResponsiveToggle from "./ResponsiveToggle.astro";
+import { Icon } from "astro-icon";
 ---
 
 <div id="main-navigation" class="is-desktop">
@@ -8,25 +8,25 @@ import { Icon } from 'astro-icon'
     <nav>
       <ul>
         <li class="brand-logo">
-          <img src={(await import('../assets/img/logo.svg')).default} >
-          <span class="sr-only">Brand Name</span>
+          <img src={(await import("../assets/img/logo.svg")).default} />
+          <span class="sr-only">Namungona Secondary</span>
         </li>
         <li class="menu-item">
           <button class="toggle-expanded-view" aria-expanded="false">
-            <Icon pack="majesticons" name="chevron-double-right-line" /> 
+            <Icon pack="majesticons" name="chevron-double-right-line" />
             <span class="sr-only">Expand menu</span>
           </button>
         </li>
         <slot />
         <li class="menu-item bottom-position">
           <a href="/login/">
-            <Icon pack="majesticons" name="logout-line" /> 
+            <Icon pack="majesticons" name="logout-line" />
             <span class="sr-only">Logout</span>
           </a>
         </li>
         <li class="menu-item bottom-position user-avatar">
           <a href="/settings/" class="logout-link">
-            <img src="/user-avatar.png" alt="">
+            <img src="/user-avatar.png" alt="" />
             <span class="sr-only">Settings</span>
           </a>
         </li>
@@ -35,7 +35,10 @@ import { Icon } from 'astro-icon'
   </div>
   <div class="container mobile-menu padding-16">
     <a href="/">
-      <img src={(await import('../assets/img/logo.svg')).default} alt="Your Logo">
+      <img
+        src={(await import("../assets/img/logo.svg")).default}
+        alt="Your Logo"
+      />
     </a>
     <ResponsiveToggle />
     <nav>
@@ -43,13 +46,13 @@ import { Icon } from 'astro-icon'
         <slot />
         <li class="menu-item">
           <a href="/login">
-            <Icon pack="majesticons" name="logout-line" /> 
+            <Icon pack="majesticons" name="logout-line" />
             <span class="sr-only">Logout</span>
           </a>
         </li>
         <li class="menu-item user-avatar">
           <a href="/settings">
-            <img src="/user-avatar.png" alt="">
+            <img src="/user-avatar.png" alt="" />
             <span class="sr-only">Settings</span>
           </a>
         </li>
@@ -60,118 +63,121 @@ import { Icon } from 'astro-icon'
 
 <script>
   // variables
-  const mainNav = document.querySelector('#main-navigation')
-  const mainMenu = mainNav.querySelector('ul')
-  const toggleExpandedView = document.querySelector('.toggle-expanded-view')
-  const menuIconLabels = [...mainNav.querySelectorAll('.sr-only')]
-  const mediaQuery = window.matchMedia('(min-width: 48em)')
-  let isMenuExpanded = localStorage.getItem('isMenuExpanded')
+  const mainNav = document.querySelector("#main-navigation");
+  const mainMenu = mainNav.querySelector("ul");
+  const toggleExpandedView = document.querySelector(".toggle-expanded-view");
+  const menuIconLabels = [...mainNav.querySelectorAll(".sr-only")];
+  const mediaQuery = window.matchMedia("(min-width: 48em)");
+  let isMenuExpanded = localStorage.getItem("isMenuExpanded");
 
   // functions
   const setActiveMenuItem = () => {
-    const menuItems = [...mainMenu.querySelectorAll('a:not([rel*="external"])')]
+    const menuItems = [
+      ...mainMenu.querySelectorAll('a:not([rel*="external"])'),
+    ];
 
-    menuItems.forEach(menuItem => {
+    menuItems.forEach((menuItem) => {
       if (menuItem.pathname === window.location.pathname) {
-        menuItem.classList.add('is-active')
-        menuItem.setAttribute('aria-current', 'page')
+        menuItem.classList.add("is-active");
+        menuItem.setAttribute("aria-current", "page");
       }
-    })
-  }
+    });
+  };
 
   const expandMenu = () => {
-    mainNav.classList.add('is-expanded')
-    localStorage.setItem('isMenuExpanded', 'true')
-    toggleExpandedView.setAttribute('aria-expanded', 'true')
-    toggleExpandedView.querySelector('span').textContent = 'Collapse menu'
-    
-    menuIconLabels.forEach(menuIconLabel => {
-      menuIconLabel.classList.remove('sr-only')
-    })
-  }
+    mainNav.classList.add("is-expanded");
+    localStorage.setItem("isMenuExpanded", "true");
+    toggleExpandedView.setAttribute("aria-expanded", "true");
+    toggleExpandedView.querySelector("span").textContent = "Collapse menu";
+
+    menuIconLabels.forEach((menuIconLabel) => {
+      menuIconLabel.classList.remove("sr-only");
+    });
+  };
 
   const collapseMenu = () => {
-    mainNav.classList.remove('is-expanded')
-    localStorage.setItem('isMenuExpanded', null)
-    toggleExpandedView.setAttribute('aria-expanded', 'false')
-    toggleExpandedView.querySelector('span').textContent = 'Expand menu'
-    
-    menuIconLabels.forEach(menuIconLabel => {
-      menuIconLabel.classList.add('sr-only')
-    })
-  }
+    mainNav.classList.remove("is-expanded");
+    localStorage.setItem("isMenuExpanded", null);
+    toggleExpandedView.setAttribute("aria-expanded", "false");
+    toggleExpandedView.querySelector("span").textContent = "Expand menu";
+
+    menuIconLabels.forEach((menuIconLabel) => {
+      menuIconLabel.classList.add("sr-only");
+    });
+  };
 
   const checkViewportWidth = () => {
     if (mediaQuery.matches) {
-      mainNav.classList.add('is-desktop')
-      mainNav.classList.remove('is-mobile')
+      mainNav.classList.add("is-desktop");
+      mainNav.classList.remove("is-mobile");
 
-      collapseMenu()
+      collapseMenu();
     } else {
-      mainNav.classList.remove('is-desktop')
-      mainNav.classList.add('is-mobile')
+      mainNav.classList.remove("is-desktop");
+      mainNav.classList.add("is-mobile");
 
-      collapseMenu()
+      collapseMenu();
     }
-  }
+  };
 
   // execution
-  mainMenu && mainMenu.addEventListener('keydown', event => {
-    const currentMenuItem = event.target.closest('li')
-    const menuItems = [...mainMenu.querySelectorAll('.menu-item')]
-    const currentIndex = menuItems.findIndex(item => item === currentMenuItem)
+  mainMenu &&
+    mainMenu.addEventListener("keydown", (event) => {
+      const currentMenuItem = event.target.closest("li");
+      const menuItems = [...mainMenu.querySelectorAll(".menu-item")];
+      const currentIndex = menuItems.findIndex(
+        (item) => item === currentMenuItem
+      );
 
-    const key = event.key
-    let targetItem
+      const key = event.key;
+      let targetItem;
 
-    if (key === 'ArrowDown') {
-      event.preventDefault()
-      if (menuItems.indexOf(currentMenuItem) === menuItems.length - 1) {
-        targetItem = menuItems[0]
-      } else {
-        targetItem = menuItems[currentIndex + 1]
+      if (key === "ArrowDown") {
+        event.preventDefault();
+        if (menuItems.indexOf(currentMenuItem) === menuItems.length - 1) {
+          targetItem = menuItems[0];
+        } else {
+          targetItem = menuItems[currentIndex + 1];
+        }
       }
-    }
 
-    if (key === 'ArrowUp') {
-      event.preventDefault()
-      if (menuItems.indexOf(currentMenuItem) === 0) {
-        targetItem = menuItems[menuItems.length - 1]
-      } else {
-        targetItem = menuItems[currentIndex - 1]
+      if (key === "ArrowUp") {
+        event.preventDefault();
+        if (menuItems.indexOf(currentMenuItem) === 0) {
+          targetItem = menuItems[menuItems.length - 1];
+        } else {
+          targetItem = menuItems[currentIndex - 1];
+        }
       }
-    }
 
-    if (key === 'Escape') {
-      targetItem = menuItems[0]
-    }
+      if (key === "Escape") {
+        targetItem = menuItems[0];
+      }
 
-    if (targetItem) {
-      targetItem.querySelector('a, button, input').focus()
-    }
-  })
+      if (targetItem) {
+        targetItem.querySelector("a, button, input").focus();
+      }
+    });
 
-  toggleExpandedView.addEventListener('click', () => {
-    mainNav.classList.contains('is-expanded')
-      ? collapseMenu()
-      : expandMenu()
-  })
+  toggleExpandedView.addEventListener("click", () => {
+    mainNav.classList.contains("is-expanded") ? collapseMenu() : expandMenu();
+  });
 
-  window.addEventListener('resize', checkViewportWidth)
+  window.addEventListener("resize", checkViewportWidth);
 
-  setActiveMenuItem()
-  checkViewportWidth()
+  setActiveMenuItem();
+  checkViewportWidth();
 
-  if (isMenuExpanded === 'true') {
-    expandMenu()
+  if (isMenuExpanded === "true") {
+    expandMenu();
   }
 </script>
 
 <style lang="scss" is:global>
-  @use '../assets/scss/base/border' as *;
-  @use '../assets/scss/base/breakpoint' as *;
-  @use '../assets/scss/base/elevation' as *;
-  @use '../assets/scss/base/size' as *;
+  @use "../assets/scss/base/border" as *;
+  @use "../assets/scss/base/breakpoint" as *;
+  @use "../assets/scss/base/elevation" as *;
+  @use "../assets/scss/base/size" as *;
 
   #main-navigation {
     background-color: var(--neutral-900);
@@ -189,17 +195,17 @@ import { Icon } from 'astro-icon'
       z-index: 1;
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
 
-      .mobile-menu { 
-        display: none; 
+      .mobile-menu {
+        display: none;
       }
     }
 
     &.is-mobile {
       flex-direction: column;
 
-      .mobile-menu { 
+      .mobile-menu {
         nav {
-          display: none; 
+          display: none;
         }
 
         &.show nav {
@@ -245,7 +251,7 @@ import { Icon } from 'astro-icon'
 
       .user-avatar a {
         padding: 0;
-        
+
         img {
           padding: 0.5rem;
           max-width: 60px;
@@ -259,7 +265,7 @@ import { Icon } from 'astro-icon'
 
       svg {
         width: 30px;
-      
+
         path {
           fill: var(--neutral-600);
           transition: fill 0.2s ease-in-out;
@@ -269,7 +275,7 @@ import { Icon } from 'astro-icon'
       a:hover,
       a:focus,
       a.is-active,
-      button:hover, 
+      button:hover,
       button:not(.toggle-expanded-view):focus {
         color: var(--neutral-800);
         background-color: var(--secondary-200);
@@ -297,9 +303,15 @@ import { Icon } from 'astro-icon'
           position: absolute;
         }
 
-        .bottom-position:nth-last-of-type(1) { bottom: 0; }
-        .bottom-position:nth-last-of-type(2) { bottom: 3.75rem; }
-        .bottom-position:nth-last-of-type(3) { bottom: 8rem; }
+        .bottom-position:nth-last-of-type(1) {
+          bottom: 0;
+        }
+        .bottom-position:nth-last-of-type(2) {
+          bottom: 3.75rem;
+        }
+        .bottom-position:nth-last-of-type(3) {
+          bottom: 8rem;
+        }
 
         .brand-logo {
           display: flex;
@@ -321,7 +333,7 @@ import { Icon } from 'astro-icon'
         }
 
         span {
-        text-decoration: underline;
+          text-decoration: underline;
         }
 
         &:hover,
@@ -348,7 +360,7 @@ import { Icon } from 'astro-icon'
         .user-avatar a {
           padding: 0.5rem 0.3rem 0;
         }
-      } 
+      }
 
       ~ main {
         margin-left: 200px;
@@ -379,7 +391,7 @@ import { Icon } from 'astro-icon'
 
       svg {
         width: 35px;
-      
+
         path {
           transition: fill 0.2s ease-in-out;
         }

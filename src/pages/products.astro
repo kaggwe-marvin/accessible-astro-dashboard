@@ -1,27 +1,28 @@
 ---
-import DefaultLayout from '../layouts/DefaultLayout.astro'
-import EmpyState from '../components/EmpyState.astro'
-import { Modal } from 'accessible-astro-components'
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import EmpyState from "../components/EmpyState.astro";
+import { Modal } from "accessible-astro-components";
 ---
 
-<DefaultLayout title="Products">
+<DefaultLayout title="student scores">
   <section>
-    <h1>Products</h1><br>
+    <h1>New cirilculum</h1><br />
     <p class="size-20">Lorem ipsum dolor sit amet.</p>
   </section>
   <section class="margin-32">
     <div class="space-content">
-      <h2>Product overview</h2>
+      <h2>Performance overview</h2>
       <EmpyState>
-        You haven't added any products yet. Start by adding some.
+        You haven't added any scores yet. Start by adding some.
       </EmpyState>
-      <button id="modal-trigger" class="button color-secondary">Add your first product</button>
-      <Modal
-        triggerId="modal-trigger"
-        title="Add product"
-        closeText="Cancel"
+      <button id="modal-trigger" class="button color-secondary"
+        >Add your first score</button
       >
-        <p>You can use this component to include a form that adds a new product to the list.</p>
+      <Modal triggerId="modal-trigger" title="Add product" closeText="Cancel">
+        <p>
+          You can use this component to include a form that adds a new score to
+          the list.
+        </p>
       </Modal>
     </div>
   </section>
